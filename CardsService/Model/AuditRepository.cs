@@ -31,6 +31,12 @@ namespace CardsService.Model
                 .ToList();
         }
 
+        public void Add(string details, int cardId)
+        {
+            Audit audit = new Audit() { Details = details, Date = DateTime.UtcNow, CardId = cardId };
+            _db.GetCollection<Audit>(collection).InsertOne(audit);
+        }
+
         public void Add(string details)
         {
             Audit audit = new Audit() { Details = details, Date = DateTime.UtcNow };

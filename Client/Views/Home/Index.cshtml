@@ -2,17 +2,47 @@
     ViewData["Title"] = "Cards Client";
 }
 <div class="row">
-    <div id="backlog" class="cards-column col-md-3">
+    <div class="cards-column col-md-3">
         <div class="column-caption">Backlog</div>
+        <div id="backlog"></div>
     </div>
-    <div id="to-do" class="cards-column col-md-3">
+    <div class="cards-column col-md-3">
         <div class="column-caption">To Do</div>
+        <div id="to-do"></div>
     </div>
-    <div id="in-progress" class="cards-column col-md-3">
+    <div class="cards-column col-md-3">
         <div class="column-caption">In Progress</div>
+        <div id="in-progress"></div>
     </div>
-    <div id="done" class="cards-column col-md-3">
+    <div class="cards-column col-md-3">
         <div class="column-caption">Done</div>
+        <div id="done"></div>
     </div>
 </div>
 
+<div class="row">
+    <div class="cards-column col-md-3">
+        <div>update all cards in Backlog column</div>
+        <input id="backlog-from" type="text" placeholder="from"/>
+        <input id="backlog-to" type="text" placeholder="to"/>
+        <button id="backlog-replace-text" class="btn btn-danger">Update</button>
+    </div>
+    <div class="cards-column col-md-3">
+        <div>update all cards in To Do column</div>
+        <input id="todo-from" type="text" placeholder="from" />
+        <input id="todo-to" type="text" placeholder="to" />
+        <button id="todo-replace-text" class="btn btn-danger">Update</button>
+    </div>
+    <div class="cards-column col-md-3">
+        <div>update all cards in In Progress column</div>
+        <input id="in-progress-from" type="text" placeholder="from" />
+        <input id="in-progress-to" type="text" placeholder="to" />
+        <button id="in-progress-replace-text" class="btn btn-danger">Update</button>
+    </div>
+    <div class="cards-column col-md-3">
+        <div>update all cards in Done column</div>
+        <input id="done-from" type="text" placeholder="from" />
+        <input id="done-to" type="text" placeholder="to" />
+        <button id="done-replace-text" class="btn btn-danger">Update</button>
+    </div>
+</div>

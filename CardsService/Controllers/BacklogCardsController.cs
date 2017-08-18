@@ -37,10 +37,11 @@ namespace CardsService.Controllers
             _audit.Add($"Insert single card: {value.Id}");
         }
 
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]ProjectCard value)
+        [HttpPut]
+        public void Put(int id, string from, string to)
         {
-            _audit.Add($"Update single card: {value.Id}");
+            _audit.Add($"Update card", id);
+            _repository.ReplaceText(from, to, id);
         }
 
         [HttpDelete("{id}")]

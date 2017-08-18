@@ -6,6 +6,7 @@ namespace CardsService.Model
     {
         IList<Audit> GetAll();
         IList<Audit> GetByCardId(int id);
+        void Add(string details, int cardId);
         void Add(string details);
     }
 }

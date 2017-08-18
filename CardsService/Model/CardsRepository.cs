@@ -1,17 +1,20 @@
 ﻿using System.Collections.Generic;
 using Octokit;
+using System;
+using System.Threading.Tasks;
 
 namespace CardsService.Model
 {
     public class CardsRepository : ICardsRepository
     {
-        private const int BacklogColumnId = 1364164;
-        private const int ToDoColumnId = 1364165;
-        private const int InProgressColumnId = 1364166;
-        private const int DoneColumnId = 1364168;
+        public const int BacklogColumnId = 1364164;
+        public const int ToDoColumnId = 1364165;
+        public const int InProgressColumnId = 1364166;
+        public const int DoneColumnId = 1364168;
         private const string GithubToken = "";
 
         ProjectCardsClient _client;
+        ProjectsClient _projectsClient;
 
         public CardsRepository()
         {
@@ -19,6 +22,34 @@ namespace CardsService.Model
             var token = new Credentials(GithubToken);
             connection.Connection.Credentials = token;
             _client = new ProjectCardsClient(connection);
+            _projectsClient = new ProjectsClient(connection);
+        }
+
+        public bool ArePreRequirementsMet(string projectName)
+        {
+            var result = false;
+            var projectExist = false;
+
+            try
+            {
+                var projects = _projectsClient.GetAllForRepository("dkacban", projectName).Result.Count;
+                if(projects>0)
+                {
+                    projectExist = true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+
+            result = _projectsClient.Column.Get(BacklogColumnId).Result != null
+                && _projectsClient.Column.Get(ToDoColumnId).Result != null
+                && _projectsClient.Column.Get(InProgressColumnId).Result != null
+                && _projectsClient.Column.Get(DoneColumnId).Result != null
+                && projectExist;
+
+            return result;
         }
 
 
@@ -48,6 +79,20 @@ namespace CardsService.Model
             var cards = _client.GetAll(DoneColumnId).Result;
 
             return cards;
+        }
+
+        public async Task ReplaceText(string from, string to, int columnId)
+        {
+            var cards = _client.GetAll(columnId).Result;
+            foreach(var card in cards)
+            {
+                var note = card.Note;
+                if (card.Note.Contains(from))
+                {
+                    var update = new ProjectCardUpdate(note.Replace(from, to));
+                    await _client.Update(card.Id, update);
+                }
+            }
         }
     }
 }

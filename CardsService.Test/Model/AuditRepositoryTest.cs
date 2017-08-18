@@ -17,5 +17,16 @@ namespace CardsService.Test.Model
             var count2 = repo.GetAll().Count;
             Assert.True(count2 == count1 + 1);
         }
+
+        [Fact]
+        public void ShouldGetSinlgeAuditEntryFromDatabase()
+        {
+            var repo = new AuditRepository();
+            var rand = new Random();
+            var randomId = rand.Next();
+            repo.Add("details", randomId);
+            var count = repo.GetByCardId(randomId).Count;
+            Assert.True(count == 1);
+        }
     }
 }

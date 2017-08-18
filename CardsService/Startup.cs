@@ -38,7 +38,9 @@ namespace CardsService
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseCors(b => b.AllowAnyOrigin());
+            app.UseCors(b => b
+                .AllowAnyOrigin()
+                .AllowAnyMethod());
 
             app.UseMvc();
         }

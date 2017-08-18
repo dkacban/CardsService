@@ -1,5 +1,6 @@
 ﻿using Octokit;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CardsService.Model
 {
@@ -9,5 +10,6 @@ namespace CardsService.Model
         IReadOnlyList<ProjectCard> GetToDoCards();
         IReadOnlyList<ProjectCard> GetInProgressCards();
         IReadOnlyList<ProjectCard> GetDoneCards();
+        Task ReplaceText(string from, string to, int columnId);
     }
 }
