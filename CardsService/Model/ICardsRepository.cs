@@ -3,8 +3,11 @@ using System.Collections.Generic;
 
 namespace CardsService.Model
 {
-    interface ICardsRepository
+    public interface ICardsRepository
     {
         IReadOnlyList<ProjectCard> GetBacklogCards();
+        IReadOnlyList<ProjectCard> GetToDoCards();
+        IReadOnlyList<ProjectCard> GetInProgressCards();
+        IReadOnlyList<ProjectCard> GetDoneCards();
     }
 }

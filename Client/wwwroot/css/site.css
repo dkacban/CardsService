@@ -35,3 +35,17 @@ textarea {
         display: none;
     }
 }
+
+.column-caption {
+    font-size : 20px;
+}
+
+.cards-column {
+    border-color: black;
+    min-height: 800px;
+}
+
+.card {
+    margin:10px;
+}
+

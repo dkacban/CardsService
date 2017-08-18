@@ -8,14 +8,15 @@ namespace CardsService.Model
         private const int BacklogColumnId = 1364164;
         private const int ToDoColumnId = 1364165;
         private const int InProgressColumnId = 1364166;
-        private const int DoneColumnId = 1364167;
+        private const int DoneColumnId = 1364168;
+        private const string GithubToken = "";
 
         ProjectCardsClient _client;
 
         public CardsRepository()
         {
             ApiConnection connection = new ApiConnection(new Connection(new ProductHeaderValue("Test")));
-            var token = new Credentials("");
+            var token = new Credentials(GithubToken);
             connection.Connection.Credentials = token;
             _client = new ProjectCardsClient(connection);
         }
